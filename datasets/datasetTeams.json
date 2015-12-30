@@ -1,0 +1,27 @@
+{
+    "_id": ObjectId("7063114bd386d8fadbd6b001"),
+    "name": "TeamOfWarriors",
+    "roleplay": "TeamOfWarriors is simply the best team of the game.",
+    "creator": "Titan",
+    "members": ["Titan", "Elfounet"]
+}
+
+
+{
+    "_id": ObjectId("7063114bd386d8fadbd6b002"),
+    "name": "GodTeam",
+    "roleplay": "You can enter this team only if you are god.",
+    "creator": "Maggi",
+    "members": ["Maggi"]
+}
+
+
+
+{
+    "_id": ObjectId("7063114bd386d8fadbd6b003"),
+    "name": "Secret",
+    "roleplay": "Secret can not be decribed. We can not tell you, else we would have to kill you ...",
+    "creator": "Warrior38000",
+    "members": ["Warrior38000"]
+}
+

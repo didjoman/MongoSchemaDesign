@@ -1,0 +1,27 @@
+{
+    "_id": ObjectId("5063114bd386d8fadbd6b001"),
+    "name": "Elf",
+    "rolePlay": " Elves are renowned for their grace and mastery of magic and weapons such as the sword and bow. Becoming physically mature by the age of 25 and emotionally mature at around 125,[1] they are also famously long-lived, capable of living more than half a millennium and remaining physically youthful. Possessed of innate beauty and easy gracefulness, they are viewed as both wondrous and haughty by other races; however, their natural detachment is seen by some as introversion or xenophobia.",
+    "adultLevel": "35",
+    "basicAgility": 3,
+    "basicForce": 1,
+    "basicIntelligence": 5
+}
+{
+    "_id": ObjectId("5063114bd386d8fadbd6b002"),
+    "name": "Orc",
+    "rolePlay": "Orcs are carnivorous humanoids, standing approximately 5'11 to 6'2, weighing from 180 to 280 lbs. They are easily noticeable due to their green to gray skin, lupine ears, lower canines resembling boar tusks, and their muscular builds. Orcs stand in a bent over shape making them appear as ape-like humans. Bestial and savage, orcs band together as trıbes, living on hunting and raiding. Believing that the only way to survive is by expanding their territories, they have developed enmities wıth many other races, although mainly elves and dwarves, as well as humans, gnomes, halflings, goblins, hobgoblins, and even other orc tribes. Even though they have good relationships with other evil humanoids in times of peace, their chaotic nature stops them from cooperating unless forced to do so by a powerful leader. Orcs live in a patriarchal society, taking pride on how many females and male children they have. Orcs like scars and take pride in exposing them, whether they are of a victory or loss. Their chief deity Gruumsh claims that the orc is the top of the food chain, and that all riches are the property of orcs stolen by others.",
+    "adultLevel": "15",
+    "basicAgility": 2,
+    "basicForce": 6,
+    "basicIntelligence": 1
+}
+{
+    "_id": ObjectId("5063114bd386d8fadbd6b003"),
+    "name": "Dwarf",
+    "rolePlay": "Dwarves average four feet in height, with squat, broad bodies.[21] Male dwarves grow thick facial hair. The female dwarves in The Lord of the Rings novels, which greatly inspired D&D, were able to grow beards as well.[22] Some authors, such as R. A. Salvatore, have followed suit in their writing, though the game rules' official position is that females do not grow beards—the fourth edition of Dungeons and Dragons portrayed female dwarves as beardless and even attractive.[23] In specific campaign settings, the potential for female dwarven facial hair sees much variation: In the World of Greyhawk some females can grow beards but those generally shave, in the Forgotten Realms they can grow full beards but also usually shave,[24] and in Eberron they do not grow facial hair at all. In older editions of the game, female dwarves did grow beards in various campaign settings.",
+    "adultLevel": "10",
+    "basicAgility": 2,
+    "basicForce": 3,
+    "basicIntelligence": 4
+}

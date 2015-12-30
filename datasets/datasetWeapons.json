@@ -1,0 +1,52 @@
+{
+    "_id": ObjectId("6063114bd386d8fadbd6b001"),
+    "name": "Sword",
+    "rolePlay": "Small sword that looks like a knife more than a real sword ... It is not even sure weather it can really cut something.",
+    "levelMin": "1",
+    "power": "1",
+    "races": [
+        ObjectId("5063114bd386d8fadbd6b001"), 
+        ObjectId("5063114bd386d8fadbd6b002"), 
+        ObjectId("5063114bd386d8fadbd6b003")
+    ]
+}
+
+
+{
+    "_id": ObjectId("6063114bd386d8fadbd6b002"),
+    "name": "Big Sword",
+    "rolePlay": "Big Sword is pretty efficient to kill orcs !",
+    "levelMin": "1",
+    "power": "1",
+    "races": [
+        ObjectId("5063114bd386d8fadbd6b001"), 
+        ObjectId("5063114bd386d8fadbd6b003")
+    ]
+}
+
+
+{
+    "_id": ObjectId("6063114bd386d8fadbd6b003"),
+    "name": "Big Fat Sword",
+    "rolePlay": "Big Fat Sword is really efficient to kill orcs !",
+    "levelMin": "1",
+    "power": "1",
+    "races": [
+        ObjectId("5063114bd386d8fadbd6b001"), 
+        ObjectId("5063114bd386d8fadbd6b003")
+    ]
+}
+
+
+{
+    "_id": ObjectId("6063114bd386d8fadbd6b004"),
+    "name": "Axe",
+    "rolePlay": "It is an axe, you can cut wood (or heads) with it.",
+    "levelMin": "3",
+    "power": "1",
+    "races": [
+        ObjectId("5063114bd386d8fadbd6b001"), 
+        ObjectId("5063114bd386d8fadbd6b002"), 
+        ObjectId("5063114bd386d8fadbd6b003")
+    ]
+}

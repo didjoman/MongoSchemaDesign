@@ -1,1 +1,4 @@
 mongo/
+report/*.pdf
+report/*.aux
+report/*.log

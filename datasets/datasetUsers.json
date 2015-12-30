@@ -1,0 +1,111 @@
+{
+    "pseudo": "didjoman", 
+    "password": "mySuperPasswordOfTheDeath", 
+    "email": "didjo@gmail.net",
+    "characters": [
+	{
+	    "name": "Titan", 
+	    "life": 150,
+	    "level": 3, 
+	    "race": ObjectId("5063114bd386d8fadbd6b001"),
+	    "raceName": "Elf",
+	    "team": ObjectId("7063114bd386d8fadbd6b001"),
+	    "position": {
+		"x": 1, 
+		"y": 3
+	    },
+	    "weapons": [
+			ObjectId("6063114bd386d8fadbd6b001"),
+			ObjectId("6063114bd386d8fadbd6b002"),
+			ObjectId("6063114bd386d8fadbd6b003")
+	    ],
+	    "kills": 10,
+	    "deaths": 7
+	},
+	{
+	    "name": "Warrior38000", 
+		"life": 1000,
+	    "level": 10, 
+	    "race": ObjectId("5063114bd386d8fadbd6b003"),
+	    "raceName": "Dwarf",
+	    "team": ObjectId("7063114bd386d8fadbd6b003"),
+	    "position": {
+		"x": 10, 
+		"y": 30
+	    },
+	    "weapons": [
+			ObjectId("6063114bd386d8fadbd6b004")
+	    ],
+	    "kills": 200,
+	    "deaths": 11
+	}
+    ]
+}
+
+
+{
+    "pseudo": "tchoubid0o", 
+    "password": "badPasswordIsStillaGoodP455W04D", 
+    "email": "tchoubi@gmail.net",
+    "characters" : [
+	{
+	    "name": "Elfounet", 
+	    "life": 50,
+	    "level": 1, 
+	    "race": ObjectId("5063114bd386d8fadbd6b001"),
+	    "raceName": "Elf",
+	    "team": ObjectId("7063114bd386d8fadbd6b001"),
+	    "position": {
+		"x": 11, 
+		"y": 12
+	    },
+	    "weapons": [
+			ObjectId("6063114bd386d8fadbd6b001")
+	    ],
+	    "kills": 0,
+	    "deaths": 1
+	}
+    ]
+}
+
+
+{
+    "pseudo": "N00B", 
+    "password": "FAIL:FirstAttemptInLearning", 
+    "email": "noob@gmail.net",
+    "characters": [
+	{
+	    "name": "Maggi", 
+	    "life": 100,
+	    "level": 2, 
+	    "race": ObjectId("5063114bd386d8fadbd6b002"),
+	    "raceName": "Orc",
+	    "team": ObjectId("7063114bd386d8fadbd6b002"),
+	    "position": {
+		"x": 14, 
+		"y": 16
+	    },
+	    "weapons": [
+			ObjectId("6063114bd386d8fadbd6b001")
+	    ],
+	    "kills": 3,
+	    "deaths": 15
+	},
+	{
+	    "name": "Naozumi", 
+	    "life": 50,
+	    "level": "1", 
+	    "race": ObjectId("5063114bd386d8fadbd6b003"),
+	    "raceName": "Dwarf",
+	    "position": {
+		"x": 16, 
+		"y": 11
+	    },
+	    "weapons": [
+			ObjectId("6063114bd386d8fadbd6b002")
+	    ],
+	    "kills": 3,
+	    "deaths": 1
+	}
+    ]
+}
