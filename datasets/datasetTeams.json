@@ -20,7 +20,7 @@
 {
     "_id": ObjectId("7063114bd386d8fadbd6b003"),
     "name": "Secret",
-    "roleplay": "Secret can not be decribed. We can not tell you, else we would have to kill you ...",
+    "roleplay": "Secret cannot be decribed. We can not tell you, else we would have to kill you ...",
     "creator": "Warrior38000",
     "members": ["Warrior38000"]
 }

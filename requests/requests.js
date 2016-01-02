@@ -9,18 +9,29 @@ db.users.aggregate([
     {$match: 
      {$and: 
       [
-	  {"characters.name": {$ne: myCharacter.name}},
-	  {"characters.position.x": {$gte: myPos.x-5}}, 
-	  {"characters.position.x": {$lte: myPos.x+5}}, 
-	  {"characters.position.y": {$gte: myPos.y-5}}, 
-	  {"characters.position.y":{$lte: myPos.y+5}}
-	  ]
+    {"characters.name": {$ne: myCharacter.name}},
+    {"characters.position.x": {$gte: myPos.x-5}}, 
+    {"characters.position.x": {$lte: myPos.x+5}}, 
+    {"characters.position.y": {$gte: myPos.y-5}}, 
+    {"characters.position.y":{$lte: myPos.y+5}}
+    ]
       }
      },
     {$project: {_id: 0, character: "$characters"}}
 ]);
 
-// 2) Give the sorted list of the 3 characters having the best kill/death ratio.
+// 2) Find the best weapon a character has and can use
+var characterName = 'Titan';
+var character = db.users.aggregate([
+    {$unwind: "$characters"}, 
+    {$match: {"characters.name": characterName}},
+    {$project: {_id: 0, character: "$characters"}}
+]).result[0].character;
+
+db.weapons.find({_id: {$in: character.weapons}, levelMin: {$lte: character.level}, races: character.race});
+
+
+// 3) Give the sorted list of the 3 characters having the best kill/death ratio.
 db.users.aggregate([
     {$unwind: "$characters"}, 
     {$project: {_id: 0, name: "$characters.name", ratio: {$divide: ["$characters.kills", "$characters.deaths"]}}},
@@ -28,7 +39,7 @@ db.users.aggregate([
     {$limit: 3}
 ]);
 
-// 3) Give the details of the team having the best average ratio.
+// 4) Give the details of the team having the best average ratio.
 var bestTeam = db.users.aggregate([
     {$unwind: "$characters"}, 
     {$match: {"characters.team": {$exists: 1}}},
@@ -40,9 +51,6 @@ var bestTeam = db.users.aggregate([
 
 // Then, We do an application-level join to get the details about the team :
 db.teams.find({_id: bestTeam.result[0]._id});
-
-// 4)
-//TODO
 
 // 5)
 // TODO
