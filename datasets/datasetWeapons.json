@@ -48,5 +48,18 @@
         ObjectId("5063114bd386d8fadbd6b001"), 
         ObjectId("5063114bd386d8fadbd6b002"), 
         ObjectId("5063114bd386d8fadbd6b003")
-    ]
+    ],
+    "throwDistance": 5
+}
+
+{
+    "_id": ObjectId("6063114bd386d8fadbd6b005"),
+    "name": "Bow",
+    "rolePlay": "A very classic bow. Fortunatly it generates infinite arrows",
+    "levelMin": 1,
+    "power": 2,
+    "races": [
+        ObjectId("5063114bd386d8fadbd6b001")
+    ],
+    "throwDistance": 100
 }

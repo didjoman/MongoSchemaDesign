@@ -60,7 +60,8 @@
 		"y": 12
 	    },
 	    "weapons": [
-			ObjectId("6063114bd386d8fadbd6b001")
+			ObjectId("6063114bd386d8fadbd6b002"),
+			ObjectId("6063114bd386d8fadbd6b005")
 	    ],
 	    "kills": 0,
 	    "deaths": 1
