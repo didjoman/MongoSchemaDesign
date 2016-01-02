@@ -35,9 +35,9 @@ To launch a mongo shell :
 
 # Directories:
 
-app/ 		: contains a node application to execute the requests on the database.
-datasets/ 	: contains the datasets used to initialise the database.
-mongo/ 		: directory used by mongoDB at launch time.
-indexes/	: contains the commands to add the indexes.
-report/		: contains the report explaining the design choices.
-requests/	: contains the requests executed by the application (ready to be executed directly in a shell)
+* app/ 		: contains a node application to execute the requests on the database.
+* datasets/ 	: contains the datasets used to initialise the database.
+* mongo/ 		: directory used by mongoDB at launch time.
+* indexes/	: contains the commands to add the indexes.
+* report/		: contains the report explaining the design choices.
+* requests/	: contains the requests executed by the application (ready to be executed directly in a shell)
