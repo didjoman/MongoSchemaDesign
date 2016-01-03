@@ -3,11 +3,11 @@
 
 ##1) Launch the MongoDB server on port 27021
 
-mongod --shardsvr --dbpath mongo --port 27021
+     mongod --shardsvr --dbpath mongo --port 27021
 
 ##2) Load Data : 
 
-./import_datasets.sh 
+     ./import_datasets.sh 
 
 ##3) Create indexes:
 ###a)	Launch a mongoDB shell :
