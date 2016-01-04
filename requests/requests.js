@@ -21,7 +21,7 @@ db.users.aggregate([
 ]);
 
 // 2) Find the best weapon a character has and can use
-var characterName = 'Titan';
+var characterName = 'Elfounet';
 var character = db.users.aggregate([
     {$unwind: "$characters"}, 
     {$match: {"characters.name": characterName}},
@@ -52,9 +52,13 @@ var bestTeam = db.users.aggregate([
 // Then, We do an application-level join to get the details about the team :
 db.teams.find({_id: bestTeam.result[0]._id});
 
-// 5)
-// TODO
-
+// 5) Mose used race
+db.users.aggregate([
+    {$unwind: "$characters"},
+    {$group: {_id: "$characters.raceName", count: {$sum: 1}}},
+    {$sort: {count: -1}},
+    {$limit: 1}
+]).result[0]._id;
 
 
 // *** Other illustrations on the DB use : 
