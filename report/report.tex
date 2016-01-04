@@ -99,7 +99,23 @@ db.users.aggregate([
 Here the index on user's pseudo is involved. It enables us to find the player faster.
 
 \paragraph*{Query 2\\}
-The second query is used to obtain a sorted list of the 3 characters having the best kill/death ratio. To do so, we unwind the array of characters, we realize a projection to work out the ratio per player and finally we sort the list by ratio and keep the 3 first characters (limit).
+The second query is used to find the best weapon that a character has and cas use. For this character, we find all the weapons he has and can use, according to his level and race. Those weapons are then ordered by power, and we keep the first one.
+
+\begin{lstlisting}
+var characterName = 'Elfounet';
+var character = db.users.aggregate([
+    {$unwind: "$characters"}, 
+    {$match: {"characters.name": characterName}},
+    {$project: {_id: 0, character: "$characters"}}
+]).result[0].character;
+
+db.weapons.find({_id: {$in: character.weapons}, levelMin: {$lte: character.level}, races: character.race});
+\end{lstlisting}
+
+In this case, no index is used.
+
+\paragraph*{Query 3\\}
+This query is used to obtain a sorted list of the 3 characters having the best kill/death ratio. To do so, we unwind the array of characters, we realize a projection to work out the ratio per player and finally we sort the list by ratio and keep the 3 first characters (limit).
 
 \begin{lstlisting}
 db.users.aggregate([
@@ -112,7 +128,7 @@ db.users.aggregate([
 
 In this case, no index is used.
 
-\paragraph*{Query 3\\}
+\paragraph*{Query 4\\}
 
 This query is used to obtain the details concerning the best team of the game (i.e. the one having the best average of ratio per player).
 To do so, we unwind the list of characters, we match those belonging to a team, we realize a projection to work out the ratio per player, we do a group to work out the average ratio per team and finally we sort and limit to get the best team.
@@ -129,6 +145,20 @@ var bestTeam = db.users.aggregate([
 \end{lstlisting}
 
 In this case, the index on characters.team is used in the match close.
+
+\paragraph*{Query 5\\}
+This query is used to find the most used race among the existing characters. To do so, we group the character by their raceName and count them. Then we keep only the first one.
+
+\begin{lstlisting}
+db.users.aggregate([
+    {$unwind: "$characters"},
+    {$group: {_id: "$characters.raceName", count: {$sum: 1}}},
+    {$sort: {count: -1}},
+    {$limit: 1}
+]).result[0]._id;
+\end{lstlisting}
+
+In this case, no index is used.
 
 \end{document}
 
