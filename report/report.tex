@@ -7,12 +7,42 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[francais]{babel}
+\usepackage{graphicx}
+\usepackage{listings}
+
+\usepackage{color}
+ 
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+ 
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+ 
+\lstset{style=mystyle}
 
 \usepackage{sectsty}
 \sectionfont{\fontsize{12}{15}\selectfont}
 
 \usepackage{geometry}
-\geometry{hmargin=1.5cm,vmargin=1.2cm}
+\geometry{hmargin=1.5cm,vmargin=1.5cm}
 
 \begin{document}
 %Header-Make sure you update this information!!!!
@@ -46,22 +76,31 @@ The game is composed of users, each user can have at most 5 characters. A charac
 
 \section{Data Stored in Database}
 
-\paragraph{Users and Characters :} the document \textIt{User}, contains a list of \textIt{Characters}. The relationship between the two is of type 1 - N (or more precisely: 1-Few). It has been chosen to embed the characters in the user document, since we often need the 2 together. Furthermore, a user can only have a few (max 5) characters (so the limit of 16MB per document will not be reached). Then, a character can not be shared by multiple users. In this case, the best solution was to embed it in the User table.
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=0.7\linewidth]{MMORPG_schema.png}
+    \caption{Schéma de la base de donnée}
+\end{figure}
 
-\paragraph{Character and Position\\}
+\paragraph{Users and Characters:} the document \textit{User}, contains a list of \textit{Characters}. The relationship between the two is of type 1 - N (or more precisely: 1-Few). It has been chosen to embed the characters in the user document, since we often need the 2 together. Furthermore, a user can only have a few (max 5) characters (so the limit of 16MB per document will not be reached). Then, a character can not be shared by multiple users. In this case, the best solution was to embed it in the User table.
+
+\paragraph{Character and Position:}
 The Position document is small, never accessed alone, and may be shared by multiple users (in a few cases). The relationship between Character and Position is N-1, but most of the positions on the map are empty. Most of the time, the application wants to know the position of the current player, and also what players are in the near area. In this case, we decided to fully embed the document Position in Character.
 
-\paragraph{Character and team}
+\paragraph{Character and team:}
 The relationship between the two is N-1 (more precisely: Few-1). A team can be accessed alone and therfore, we could not embed it (moreover, it would have implied a lot of redundancy).\\
 The relationship is two-way, because when selecting a character we want to know his team and when we select a team we want to know its members.
 In order to optimize it, we have added a reference to the team in Character and a list of members in team.
 
-\paragraph{Character and weapons}
+\paragraph{Character and weapons:}
 This is a N-N relationship. Weapons may be accessed standalone (for example in the shop), thus it could not be embedded. Most of the time, we want to know the weapons of a character (never in the opposite way). For these reasons, a Character contains a list of weapons references.
 
-\paragraph{Character and race}
+\paragraph{Character and race:}
 This is a 1-N relationship. Races contains different characteristics and it would be costly to embed it in characters. Races may be accessed standalone (list of races). Most of the time, we need to know the race of a character. We never want to know all the characters of a race. Thus, it is a one way relationship. Therefore, a character contains a ref to his race. \\
 Most of the time, when we access a character, we want to access the name of his race, that is why we added the name of the race in the Character document (denormalisation). This decision increases the speed of the read, and dicreases the updates. This is a good decision because the races are barely never updated.
+
+
+
 
 \section{Indexes}
 And index has been created on User pseudos, since most of the time, users are accessed by there pseudo.\\
@@ -85,13 +124,13 @@ db.users.aggregate([
      {$and: 
       [
           {``characters.name'': {$ne: myCharacter.name}},
-            {``characters.position.x'': {$gte: myPos.x-5}}, 
-              {``characters.position.x'': {$lte: myPos.x+5}}, 
-                {``characters.position.y'': {$gte: myPos.y-5}}, 
-                  {``characters.position.y'':{$lte: myPos.y+5}}
-                    ]
-      }
-     },
+          {``characters.position.x'': {$gte: myPos.x-5}}, 
+          {``characters.position.x'': {$lte: myPos.x+5}}, 
+          {``characters.position.y'': {$gte: myPos.y-5}}, 
+          {``characters.position.y'':{$lte: myPos.y+5}}
+      ]
+     }
+    },
     {$project: {_id: 0, character: ``$characters''}}
 ]);
 \end{lstlisting}
@@ -100,7 +139,8 @@ Here the index on user's pseudo is involved. It enables us to find the player fa
 
 \paragraph*{Query 2\\}
 The second query is used to find the best weapon that a character has and cas use. For this character, we find all the weapons he has and can use, according to his level and race. Those weapons are then ordered by power, and we keep the first one.
-
+~\\
+~\\
 \begin{lstlisting}
 var characterName = 'Elfounet';
 var character = db.users.aggregate([
@@ -109,7 +149,10 @@ var character = db.users.aggregate([
     {$project: {_id: 0, character: "$characters"}}
 ]).result[0].character;
 
-db.weapons.find({_id: {$in: character.weapons}, levelMin: {$lte: character.level}, races: character.race});
+db.weapons.find({_id: {$in: character.weapons}, 
+                 levelMin: {$lte: character.level}, 
+                 races: character.race
+                });
 \end{lstlisting}
 
 In this case, no index is used.
@@ -120,7 +163,11 @@ This query is used to obtain a sorted list of the 3 characters having the best k
 \begin{lstlisting}
 db.users.aggregate([
     {$unwind: ``$characters''}, 
-    {$project: {_id: 0, name: ``$characters.name'', ratio: {$divide: [``$characters.kills'', ``$characters.deaths'']}}},
+    {$project: {_id: 0, 
+                name: ``$characters.name'', 
+                ratio: {$divide: [``$characters.kills'', ``$characters.deaths'']}
+               }
+    },
     {$sort: {ratio: -1}},
     {$limit: 3}
 ]);
@@ -137,7 +184,11 @@ To do so, we unwind the list of characters, we match those belonging to a team, 
 var bestTeam = db.users.aggregate([
     {$unwind: ``$characters''}, 
     {$match: {``characters.team'': {$exists: 1}}},
-    {$project: {_id: 0, name: ``$characters.name'', team: ``$characters.team'', ratio: {$divide: [``$characters.kills'', ``$characters.deaths'']}}},
+    {$project: {_id: 0, name: ``$characters.name'',
+                team: ``$characters.team'', 
+                ratio: {$divide: [``$characters.kills'', ``$characters.deaths'']}
+               }
+    },
     {$group: {_id: ``$team'', average_ratio: {$avg: ``$ratio''}}},
     {$sort: {average_ratio: -1}},
     {$limit: 1}
